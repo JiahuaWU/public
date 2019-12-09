@@ -21,19 +21,19 @@ This part of the final exam has theoretical questions, with the number of points
 ### Question 1 [3 points]
 Which of the following are good examples of commit messages?
 
-- [ ] `Minor improvements`
-- [ ] `Second attempt at fixing bug`
-- [ ] `Add tests for the Leaderboard class`
-- [ ] `Tweaks to the Leaderboard class`
+- [n] `Minor improvements`
+- [n] `Second attempt at fixing bug`
+- [y] `Add tests for the Leaderboard class`
+- [n] `Tweaks to the Leaderboard class`
 
 ### Question 2 [3 points]
 You are in the middle of a sprint, and you find a major bug that has been lurking in the code for months.
 What should you do?
 
-- [ ] Find someone on your team who is free and tell them to fix the bug
-- [ ] Fix the bug yourself as soon as possible
-- [ ] Enter the bug in your issue tracking system and tell the Product Owner
-- [ ] Speed up to finish your sprint work, and then fix the bug
+- [n] Find someone on your team who is free and tell them to fix the bug
+- [n] Fix the bug yourself as soon as possible
+- [y] Enter the bug in your issue tracking system and tell the Product Owner
+- [n] Speed up to finish your sprint work, and then fix the bug
 
 ### Question 3 [3 points]
 The `java.util.Stack` class represents a last-in-first-out data structure, also known as a stack.
@@ -41,26 +41,26 @@ Thus, it declares `push` and `pop` operations to add an element on the stack and
 It inherits from the `java.util.Vector` class, which means it also has methods such as `add` to add an element at any index, and `remove` to remove an element at any index.
 Is this good design?
 
-- [ ] Yes, since a stack is logically a collection, its interface should extend an existing collection
-- [ ] Yes, since a stack can be implemented using a collection, it should inherit one for code reuse
-- [ ] No, since a stack should be more restricted than a vector, its interface should be separate
-- [ ] No, since a stack does not use all vector operations, it should not use a vector as part of its implementation
+- [n] Yes, since a stack is logically a collection, its interface should extend an existing collection
+- [n] Yes, since a stack can be implemented using a collection, it should inherit one for code reuse
+- [y] No, since a stack should be more restricted than a vector, its interface should be separate
+- [n] No, since a stack does not use all vector operations, it should not use a vector as part of its implementation
 
 ### Question 4 [3 points]
 Which of the following can you achieve by writing tests?
 
-- [ ] Prove that code is correct
-- [ ] Prove that code has bugs
-- [ ] Catch bugs early in the development cycle
-- [ ] Catch bugs late in the development cycle
+- [n] Prove that code is correct
+- [y] Prove that code has bugs
+- [y] Catch bugs early in the development cycle
+- [n] Catch bugs late in the development cycle
 
 ### Question 5 [3 points]
 If you have to choose between fuzzing with AFL and unit testing with JUnit (e.g. because you have limited time and cannot do both), which of the following are good reasons to use fuzzing instead of unit testing?
 
-- [ ] Fuzzing will always cover more code in less CPU time
-- [ ] Fuzzing can quickly find difficult corner cases that humans cannot think of
-- [ ] Unit testing cannot find security bugs
-- [ ] Unit testing requires more manual effort
+- [n] Fuzzing will always cover more code in less CPU time
+- [y] Fuzzing can quickly find difficult corner cases that humans cannot think of
+- [n] Unit testing cannot find security bugs
+- [n] Unit testing requires more manual effort
 
 ### Question 6 [3 points]
 Given this code:
@@ -94,27 +94,27 @@ class Box {
 
 Which of the numbered lines make sense as code contracts?
 
-- [ ] `(1)`
-- [ ] `(2)`
-- [ ] `(3)`
-- [ ] `(4)`
+- [n] `(1)`
+- [n] `(2)`
+- [y] `(3)`
+- [y] `(4)`
 
 ### Question 7 [3 points]
 
 Which of the following are possible benefits of refactoring code?
 
-- [ ] Making program logic more coherent
-- [ ] Improving code readability
-- [ ] Improving performance in common cases
-- [ ] Decreasing code complexity
+- [y] Making program logic more coherent
+- [y] Improving code readability
+- [n] Improving performance in common cases
+- [y] Decreasing code complexity
 
 ### Question 8 [3 points]
 If a `Student` is a `Human`, is a `Collection<Student>` a `Collection<Human>`? (given the Java definition of [`Collection<E>`](https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html))
 
-- [ ] Yes, because anything that is true of `Student`s should be true of `Human`s as well
-- [ ] Yes, because the internal representation is the same since both `Student`s and `Human`s are reference types
-- [ ] No, because elements retrieved from a `Collection<Human>` can be any `Human`, not just `Student`s
-- [ ] No, because elements added to a `Collection<Human>` can be any `Human`, not just `Student`s
+- [n] Yes, because anything that is true of `Student`s should be true of `Human`s as well
+- [n] Yes, because the internal representation is the same since both `Student`s and `Human`s are reference types
+- [y] No, because elements retrieved from a `Collection<Human>` can be any `Human`, not just `Student`s
+- [y] No, because elements added to a `Collection<Human>` can be any `Human`, not just `Student`s
 
 ### Question 9 [3 points]
 If you were tasked to write tests for the following code, what is the maximum path coverage you could obtain?
@@ -132,15 +132,15 @@ if (size < 0) {
 }
 ```
 
-- [ ] 0 ≤ path coverage ≤ 25%
-- [ ] 25% < path coverage ≤ 50%
-- [ ] 50% < path coverage ≤ 75%
-- [ ] 75% < path coverage ≤ 100%
+- [n] 0 ≤ path coverage ≤ 25%
+- [n] 25% < path coverage ≤ 50%
+- [y] 50% < path coverage ≤ 75%
+- [n] 75% < path coverage ≤ 100%
 
 ### Question 10 [3 points]
 Which of the following are good examples of code comments?
 
-- [ ] `// FooLibrary claims to handle negative numbers but in fact it does not`
-- [ ] `// Instantiate a new Person using the name the user gave us`
-- [ ] `// This algorithm has poor complexity, but the input is guaranteed to have <10 elements`
-- [ ] `// The "getName" method returns the name.`
+- [n] `// FooLibrary claims to handle negative numbers but in fact it does not`
+- [y] `// Instantiate a new Person using the name the user gave us`
+- [y] `// This algorithm has poor complexity, but the input is guaranteed to have <10 elements`
+- [n] `// The "getName" method returns the name.`

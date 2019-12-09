@@ -9,14 +9,9 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.fail;
 
+import ch.epfl.sweng.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import ch.epfl.sweng.Forum;
-import ch.epfl.sweng.NoSuchPostException;
-import ch.epfl.sweng.Question;
-import ch.epfl.sweng.StandardUser;
-import ch.epfl.sweng.User;
 
 public final class ForumTests {
     private final User alice = new StandardUser("Alice");
@@ -38,6 +33,16 @@ public final class ForumTests {
     @Test(expected = IllegalArgumentException.class)
     public void cannotPostQuestionWithNullText() {
         forum.postQuestion(alice, null);
+    }
+
+    @Test(expected = IllegalOperationException.class)
+    public void cannotPostQuestionWithShortText() {
+        forum.postQuestion(alice, " ");
+    }
+
+    @Test
+    public void canPostQuestion() {
+        forum.postQuestion(alice, "oiawejfoiajwofi");
     }
 
     @Test
@@ -71,6 +76,20 @@ public final class ForumTests {
         }
 
         fail("Should have thrown an IllegalArgumentException.");
+    }
+
+    @Test
+    public void canPostAnswer() {
+        forum.postQuestion(alice, "Question text");
+        Question q = forum.getQuestions().get(0);
+        forum.postAnswer(bob, q, "liwefjiaewfj");
+    }
+
+    @Test(expected = IllegalOperationException.class)
+    public void cannotAnswerOwnQuestion() {
+        forum.postQuestion(alice, "Question text");
+        Question q = forum.getQuestions().get(0);
+        forum.postAnswer(alice, q, "liwefjiaewfj");
     }
 
     @Test
@@ -116,6 +135,18 @@ public final class ForumTests {
         forum.editPost(alice, null, "New post text");
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void cannotEditWithNullText() {
+        forum.postQuestion(alice, "iwuehroiwejfo");
+        forum.editPost(alice, forum.getQuestions().get(0), null);
+    }
+
+    @Test(expected = IllegalOperationException.class)
+    public void cannotEditByUnvalidUsers() {
+        forum.postQuestion(alice, "iwuehroiwejfo");
+        forum.editPost(bob, forum.getQuestions().get(0), "iouwehrpwiuher");
+    }
+
     @Test
     public void cannotEditQuestionOutsideForum() {
         otherForum.postQuestion(alice, "Question text");
@@ -128,5 +159,18 @@ public final class ForumTests {
         }
 
         fail("Should have thrown a NoSuchPostException.");
+    }
+
+    @Test
+    public void leaderBoardTest() {
+        Leaderboard l = new Leaderboard(forum);
+        User user = new StandardUser("Alice");
+        User user1 = new StandardUser("jiahua");
+        User user2 = new StandardUser("gauvain");
+        forum.postQuestion(user, "Who wants to go to Sat after the exam?");
+        forum.postAnswer(user1, forum.getQuestions().get(0), "aoisjefoijoewoijo");
+        forum.postAnswer(user2, forum.getQuestions().get(0), "osdjfoijojiwejfo");
+        l.toString();
+        System.out.println(l);
     }
 }

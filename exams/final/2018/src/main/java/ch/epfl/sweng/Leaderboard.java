@@ -8,21 +8,30 @@ package ch.epfl.sweng;
 // You CAN add interface implementations.
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+import java.util.*;
+
 /**
  * A leaderboard that counts points.
  * The points are tallied as follows:
  * - Posting a question is worth 5 points.
  * - Posting an answer is worth 1 point.
  */
-public final class Leaderboard {
+public final class Leaderboard implements Observer{
+    private Forum forum;
+    private HashMap<User, Integer> points;
     /**
      * Constructs a leaderboard for the specified forum.
      *
      * @throws IllegalArgumentException if the forum is null.
      */
     public Leaderboard(Forum forum) {
-        // TODO
-        throw new UnsupportedOperationException();
+        this.forum = forum;
+        forum.addObserver(this);
+        points = new HashMap<>();
+        if (forum == null) {
+            throw new IllegalArgumentException();
+        }
+
     }
 
     /**
@@ -59,7 +68,40 @@ public final class Leaderboard {
      */
     @Override
     public String toString() {
-        // TODO
-        throw new UnsupportedOperationException();
+        String res = "";
+        List<Map.Entry<User, Integer> > list = new LinkedList<>(points.entrySet());
+
+        // Sort the list
+        list.sort(Map.Entry.comparingByValue());
+
+        int count = 1;
+        for (int i = list.size() - 1; i > 0; i--) {
+            int innerCount = 1;
+            res += "#" + count + " " + list.get(i).getKey().getName() + " " + list.get(i).getValue() + "\n";
+            while (i > 1 && list.get(i).getValue() == list.get(i - 1).getValue()) {
+                i--;
+                innerCount++;
+                res += "#" + count + " " + list.get(i).getKey().getName() + " " + list.get(i).getValue() + "\n";
+            }
+            count += innerCount;
+        }
+        res += "#" + count + " " + list.get(0).getKey().getName() + " " + list.get(0).getValue();
+        return res;
+    }
+
+    @Override
+    public void update(Observable observable, Object arg) {
+        List arg_list = (List) arg;
+        User u = (User) arg_list.get(0);
+        String op = (String) arg_list.get(1);
+        if (!points.containsKey(u)) {
+            points.put(u, 0);
+        }
+        if (op.equals("postQuestion")) {
+            points.put(u, points.get(u) + 5);
+        } else if (op.equals("postAnswer")) {
+            points.put(u, points.get(u) + 1);
+        }
+
     }
 }
